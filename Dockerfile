@@ -7,5 +7,4 @@ COPY . .
 RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-WORKDIR ./myapp
-CMD gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
+CMD ["gunicorn", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000"]

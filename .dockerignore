@@ -1,14 +1,9 @@
-# Python 환경 파일 무시
 .venv
 venv
 __pycache__
 
-# IDE/OS 파일 무시
 .git
 .gitignore
 .idea
 *.log
 *.sqlite
-
-# Dockerfile에서 이미 복사했으므로 재복사 방지
-requirements.txt

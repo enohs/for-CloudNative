@@ -1,4 +1,5 @@
 import datetime
+import os
 from contextlib import asynccontextmanager
 from typing import Annotated, AsyncGenerator
 
@@ -25,7 +26,12 @@ class BoardUpdate(SQLModel):
     title: str | None = None
     content: str | None = None
 
-postgres_url = "postgresql://postgres:1234@localhost/cloudnative"
+POSTGRES_USER = os.environ.get("POSTGRES_USER", "postgres")
+POSTGRES_PASS = os.environ.get("POSTGRES_PASSWORD", "mysecretpassword")
+POSTGRES_HOST = os.environ.get("POSTGRES_HOST", "10.0.2.4")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", "cloudnative")
+
+postgres_url = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASS}@{POSTGRES_HOST}/{POSTGRES_DB}"
 engine = create_engine(postgres_url)
 
 def create_db_and_tables():
