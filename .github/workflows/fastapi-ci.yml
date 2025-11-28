@@ -59,7 +59,7 @@ jobs:
           context: ./app
           push: true
           tags: ${{ env.DOCKER_TAG }}
-          file: ./Dockerfile
+          file: ./app/Dockerfile
 
       # 2-4. ArgoCD Manifest 업데이트 (GitOps 트리거의 핵심)
       - name: Update Deployment Image Tag
