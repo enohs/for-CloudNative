@@ -68,7 +68,7 @@ jobs:
       - name: Apply Image Tag Update
         run: |
           yq '.spec.template.spec.containers[0].image = "${{ env.DOCKER_TAG }}"' \
-          -i ${{ github.workspace }}/k8s/fastapi-deployment.yaml
+          -i ${{ github.workspace }}/k8s/fastapi-deploy.yaml
 
       - name: Commit and Push Manifest Update
         run: |
