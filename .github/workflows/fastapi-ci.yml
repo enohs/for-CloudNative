@@ -64,11 +64,15 @@ jobs:
       # 2-4. ArgoCD Manifest 업데이트 (GitOps 트리거의 핵심)
       - name: Update Deployment Image Tag
         uses: mikefarah/yq@v4
+
+      - name: Apply Image Tag Update
         run: |
-          yq '.spec.template.spec.containers[0].image = "${{ env.DOCKER_TAG }}"' -i k8s/fastapi-deployment.yaml
-          
+          yq '.spec.template.spec.containers[0].image = "${{ env.DOCKER_TAG }}"' \
+            -i k8s/fastapi-deployment.yaml
+
+      - name: Commit and Push Manifest Update
+        run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          
           git commit -am "CI/CD: Deploying new image ${{ github.sha }}"
           git push
