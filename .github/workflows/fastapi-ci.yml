@@ -3,6 +3,8 @@ name: fastapi-ci.yml
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'k8s/**'
 
 jobs:
   # 1. CI (지속적 통합) 단계: 코드 품질 및 테스트 검증
