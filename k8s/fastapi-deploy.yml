@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: fastapi-container
-          image: enohs/fastapi-board:ed3bb92ec1ab8c842935aa5cd0c9e87addda01a6
+          image: enohs/fastapi-board:b5caa5cad902ccbe62b2c44fa16959b31d2c5a02
           ports:
             - containerPort: 8000
           env:
