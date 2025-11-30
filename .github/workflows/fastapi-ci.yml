@@ -7,7 +7,7 @@ on:
       - 'k8s/**'
 
 jobs:
-  # 1. CI (지속적 통합) 단계: 코드 품질 및 테스트 검증
+  # 1. CI 단계: 코드 품질 및 테스트 검증
   quality_gate_and_test:
     runs-on: ubuntu-latest
     steps:
@@ -29,10 +29,10 @@ jobs:
           pip install flake8
           flake8 app/ --max-complexity=10 --max-line-length=120
 
-  # 2. CD (지속적 배포) 트리거 단계: 빌드, 푸시 및 Manifest 업데이트
+  # 2. CD 트리거 단계: 빌드, 푸시 및 Manifest 업데이트
   build_and_update_manifest:
     runs-on: ubuntu-latest
-    needs: quality_gate_and_test # 👈 테스트 Job이 성공해야만 실행
+    needs: quality_gate_and_test
 
     steps:
       - name: Checkout code (for Manifest Update)
@@ -63,7 +63,7 @@ jobs:
           tags: ${{ env.DOCKER_TAG }}
           file: ./app/Dockerfile
 
-      # 2-4. ArgoCD Manifest 업데이트 (GitOps 트리거의 핵심)
+      # 2-4. ArgoCD Manifest 업데이트
       - name: Update Deployment Image Tag
         uses: mikefarah/yq@v4
 
